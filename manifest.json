@@ -1,0 +1,26 @@
+{
+  "name": "Simple_GC",
+    "version": "1.0",
+    "description": "간단하게 일정을 추가할 수 있는 확장프로그램",
+    "manifest_version": 2,
+    "browser_action": {
+      "default_title": "Simple_GC"
+    },
+    "background": {
+      "scripts": [
+        "background.js"
+      ],
+      "persistent": false
+    },
+    "permissions": [
+      "identity"
+    ],
+    "oauth2": {
+      "client_id": "765290039571-q8jaqvtipe8pq67b5s7u0otiuohpmq3d.apps.googleusercontent.com",
+      "scopes":[
+        "https://www.googleapis.com/auth/calendar",
+        "https://www.googleapis.com/auth/calendar.events"
+      ]
+    },
+    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwONOFski2PenT4DbeWZuy4spz9PM1g55JzGNEtrsHE/5kVADy4dmskwT/w0IbTFYVYtYuQr9fa5l0TiX4rDbcS1Z8lNblQbGalkLghysaA+u9FtNHAQlWiG8KiHMRiedU84UxTVMr8ARqssZiaN09S1VHpcq3qSrfW/V+lprH8+OMag/MODeW/E4CtBX0GHdwO/MhxckiDHwNREmkk3yzr9AUw0i1Qz+qm4UJh2z8c716QZUkoFVzVff+f7R8rWv84qWA4JVRIyCUdzNpCoGnd1ctluMWRSngd7ujhGK/TocoMnlCRQRtrzzcbcJDwEOYHqIn5J0BhSXGAtLxOedLwIDAQAB"
+  }
