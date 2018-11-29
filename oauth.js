@@ -43,8 +43,8 @@ window.onload = function() {
                             }
                         ]
                     },
-                    "description": "테스트용이니 신경 ㄴㄴ",
-                    "summary": "테스트 용 일정"
+                    "description": document.getElementById('desc').value,
+                    "summary": document.getElementById('title').value
                 })
             })
             .then(function (data) {  
