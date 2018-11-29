@@ -1,17 +1,31 @@
 <html>
   <head>
     <title>Simple_GC</title>
-    <style>
-      button {
-        padding: 10px;
-        background-color: #3C79F8;
-        display: inline-block;
-      }
-    </style>
+    <meta charset="utf-8">
     <script type="text/javascript" src="oauth.js"></script>
+    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script>
+    <script src="semantic/dist/semantic.min.js"></script>
   </head>
   <body>
-    <button>test</button>
-    <div id="OauthTestDiv"></div>
+    <div class="ui labeled input">
+      <div class="ui violet label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        일정 제목
+      </font></font></div>
+      <input type="text" placeholder="제목을 입력...">
+      <div class="ui blue label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+        일정 설명
+      </font></font></div>
+      <input type="text" placeholder="설명을 입력...">
+    </div>
+    <div class="ui divider"></div>
+    <div class="ui buttons">
+      <button id="Cancel" class="ui button">취소</button>
+      <div class="or"></div>
+      <button id="complete_btn" class="ui positive button">일정 추가</button>
+    </div>
   </body>
 </html>

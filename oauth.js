@@ -1,5 +1,10 @@
 window.onload = function() {
-    document.querySelector('button').addEventListener('click', function() {
+    //  취소 버튼 시 팝업 창 종료
+    document.getElementById('Cancel').addEventListener('click',function(){
+        window.close();
+    });
+    //  일정 추가시 캘린더에 일정 추가
+    document.querySelector('#complete_btn').addEventListener('click', function() {
         //  주의!! manifest.json 파일의 scopes가 비어있는 값이면 오류발생함
         chrome.identity.getAuthToken({interactive: true}, function(token) {
             console.log(token);

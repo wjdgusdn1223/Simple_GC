@@ -4,7 +4,8 @@
     "description": "간단하게 일정을 추가할 수 있는 확장프로그램",
     "manifest_version": 2,
     "browser_action": {
-      "default_title": "Simple_GC"
+      "default_title": "Simple_GC",
+      "default_popup": "index.html"
     },
     "background": {
       "scripts": [
