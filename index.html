@@ -4,34 +4,84 @@
     <meta charset="utf-8">
     <script type="text/javascript" src="oauth.js"></script>
     <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
-    <script
-      src="https://code.jquery.com/jquery-3.1.1.min.js"
-      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-      crossorigin="anonymous"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="semantic/dist/semantic.min.js"></script>
+    <script type="text/javascript" src="/node_modules/semantic-ui-calendar/dist/calendar.min.js"></script>
+    <link rel="stylesheet" href="/node_modules/semantic-ui-calendar/dist/calendar.min.css"/>
   </head>
   <body>
-    <div class="ui left aligned grid">
-      <div class="row">
+    <div class="container">
+      <div class="ui segment">
         <div class="ui labeled input">
           <div class="ui violet label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
             일정 제목
           </font></font></div>
           <input type="text" id="title" placeholder="제목을 입력...">
         </div>
-      </div>
-      <div class="row">
         <div class="ui labeled input">
           <div class="ui blue label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
             일정 설명
           </font></font></div>
           <input type="text" id="desc" placeholder="설명을 입력...">
         </div>
-      </div>
-      <div class="row">
-          <div class="ui divider"></div>
-      </div>
-      <div class="row">
+        <div class="ui divider"></div>
+        <div class="ui calendar" id="start">
+          <div class="ui labeled input right icon">
+            <div class="ui red label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                시작
+            </font></font></div>
+            <i class="calendar icon"></i>
+            <input type="text" placeholder="시작 시간 입력...">
+          </div>
+        </div>
+        <div class="ui calendar" id="end">
+            <div class="ui labeled input right icon">
+              <div class="ui black label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                  종료
+              </font></font></div>
+              <i class="calendar icon"></i>
+              <input type="text" placeholder="종료 시간 입력...">
+            </div>
+          </div>
+        <div class="ui divider"></div>
+        <div class="ui form">
+          <div class="grouped fields">
+            <div class="ui large pink label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+              알림 설정
+            </font></font></div>
+            <div class="field">
+              <div class="ui toggle checkbox">
+                <input type="radio" name="reminder" checked="checked">
+                <label>설정 안함(기본 설정)</label>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui toggle checkbox">
+                <input type="radio" name="reminder">
+                <label>팝업 알람</label>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui toggle checkbox">
+                <input type="radio" name="reminder">
+                <label>이메일 알람</label>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui toggle checkbox">
+                <input type="radio" name="reminder">
+                <label>팝업, 이메일 알람</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ui labeled input">
+            <div class="ui orange label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+              알림 시간
+            </font></font></div>
+            <input type="text" id="minute" placeholder="몇 분전...">
+        </div>
+        <div class="ui divider"></div>
         <div class="ui buttons">
           <button id="Cancel" class="ui button">취소</button>
           <div class="or"></div>
