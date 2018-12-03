@@ -9,6 +9,17 @@ window.onload = function() {
         chrome.identity.getAuthToken({interactive: true}, function(token) {
             console.log(token);
             
+            //  시작 날짜 종료 날짜 분류
+            var st = $('#start').calendar('get date') + "";
+            var et = $('#end').calendar('get date') + "";
+
+            var stArray = st.split(' ');
+            var etArray = et.split(' ');
+            
+            stArray[1] = monthConvert(stArray[1]);
+            etArray[1] = monthConvert(etArray[1]);
+
+            //  post로 요청
             fetch("https://www.googleapis.com/calendar/v3/calendars/primary/events?"+
                     "sendUpdates=all&key=AIzaSyDsyAyx4zEUsErwp__HN5yUnmmcekuMj28", 
                 {  
@@ -22,11 +33,11 @@ window.onload = function() {
                     body: JSON.stringify({
                         "start":
                         {
-                            "dateTime":"2018-11-29T12:30:00+09:00"
+                            "dateTime": stArray[3] + "-" + stArray[1] + "-" + stArray[2] + "T" + stArray[4] + "+09:00"
                         },
                         "end":
                         {
-                            "dateTime":"2018-12-01T13:00:00+09:00"
+                            "dateTime": etArray[3] + "-" + etArray[1] + "-" + etArray[2] + "T" + etArray[4] + "+09:00"
                         },
                         "colorId":"1",
                         "visibility":"default",
@@ -37,11 +48,11 @@ window.onload = function() {
                             [
                                 {
                                     "method": "email",
-                                    "minutes": 120
+                                    "minutes": document.getElementById('minute').value
                                 },
                                 {
                                     "method": "popup",
-                                    "minutes": 120
+                                    "minutes": document.getElementById('minute').value
                                 }
                             ]
                         },
@@ -57,9 +68,59 @@ window.onload = function() {
                 console.log('Request failure: ', error);  
             });
         });
-        window.close();
     });
     // 시작-종료 날짜 입력
-    $('#start').calendar();
-    $('#end').calendar();
+    $('#start').calendar({
+        type: 'datetime',
+        ampm: false,
+        monthFirst: false
+    });
+    $('#end').calendar({
+        type: 'datetime',
+        ampm: false,
+        monthFirst: false
+    });
 };
+
+function monthConvert(month){
+    switch(month){
+        case 'Jan':
+            month = '1';
+            break;
+        case 'Feb':
+            month = '2';
+            break;
+        case 'Mar':
+            month = '3';
+            break;
+        case 'Apr':
+            month = '4';
+            break;
+        case 'May':
+            month = '5';
+            break;
+        case 'Jun':
+            month = '6';
+            break;
+        case 'Jul':
+            month = '7';
+            break;
+        case 'Aug':
+            month = '8';
+            break;
+        case 'Sep':
+            month = '9';
+            break;
+        case 'Oct':
+            month = '10';
+            break;
+        case 'Nov':
+            month = '11';
+            break;
+        case 'Dec':
+            month = '12';
+            break;
+    }
+
+    return month;
+}
