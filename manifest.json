@@ -7,6 +7,17 @@
       "default_title": "Simple_GC",
       "default_popup": "index.html"
     },
+    "commands": {
+      "_execute_browser_action": {
+        "suggested_key": {
+          "windows": "Ctrl+Shift+Y",
+          "mac": "Command+Shift+Y",
+          "chromeos": "Ctrl+Shift+U",
+          "linux": "Ctrl+Shift+J"
+        },
+        "description": "Simple_GC shortcut key"
+      }
+    },
     "background": {
       "scripts": [
         "background.js"

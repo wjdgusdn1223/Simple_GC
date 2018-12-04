@@ -91,6 +91,9 @@ function addSchedule(token){
             break;
     }
 
+    //  예외처리
+    
+
     //  post로 요청
     fetch("https://www.googleapis.com/calendar/v3/calendars/primary/events?"+
             "sendUpdates=all&key=AIzaSyDsyAyx4zEUsErwp__HN5yUnmmcekuMj28", 
