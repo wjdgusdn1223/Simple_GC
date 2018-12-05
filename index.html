@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>Simple_GC</title>
@@ -10,7 +11,7 @@
     <link rel="stylesheet" href="/node_modules/semantic-ui-calendar/dist/calendar.min.css"/>
   </head>
   <body>
-    <div class="container">
+    <div class="container" id="container">
       <div class="ui segment">
         <div class="ui labeled input">
           <div class="ui violet label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
@@ -82,6 +83,15 @@
             <input type="text" id="minute" placeholder="몇 분전..." autocomplete="off">
         </div>
         <div class="ui divider"></div>
+        <div class="ui red message hidden" id="eMsg">
+          <i class="close icon" id="close"></i>
+          <div class="header"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            주의사항!
+          </font></font></div>
+          <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+            제목, 시작 시간, 종료 시간은 필수 입력 항목입니다.
+          </font></font></p>
+        </div>
         <div class="ui buttons">
           <button id="Cancel" class="ui button">취소</button>
           <div class="or"></div>
