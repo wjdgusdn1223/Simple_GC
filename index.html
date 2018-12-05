@@ -9,17 +9,22 @@
     <script src="semantic/dist/semantic.min.js"></script>
     <script type="text/javascript" src="/node_modules/semantic-ui-calendar/dist/calendar.min.js"></script>
     <link rel="stylesheet" href="/node_modules/semantic-ui-calendar/dist/calendar.min.css"/>
+    <style>
+      body{
+        min-width: 350px;
+      }
+    </style>
   </head>
   <body>
     <div class="container" id="container">
-      <div class="ui segment">
-        <div class="ui labeled input">
+      <div class="ui basic segment" id="contents">
+        <div class="ui fluid labeled input">
           <div class="ui violet label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
             일정 제목
           </font></font></div>
           <input type="text" id="title" placeholder="제목을 입력..." autocomplete="off">
         </div>
-        <div class="ui labeled input">
+        <div class="ui fluid labeled input">
           <div class="ui blue label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
             일정 설명
           </font></font></div>
@@ -27,7 +32,7 @@
         </div>
         <div class="ui divider"></div>
         <div class="ui calendar" id="start">
-          <div class="ui labeled input right icon">
+          <div class="ui fluid labeled input right icon">
             <div class="ui red label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
                 시작
             </font></font></div>
@@ -36,7 +41,7 @@
           </div>
         </div>
         <div class="ui calendar" id="end">
-            <div class="ui labeled input right icon">
+            <div class="ui fluid labeled input right icon">
               <div class="ui black label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
                   종료
               </font></font></div>
@@ -76,7 +81,7 @@
             </div>
           </div>
         </div>
-        <div class="ui labeled input">
+        <div class="ui fluid labeled input">
             <div class="ui orange label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
               알림 시간
             </font></font></div>
@@ -92,7 +97,7 @@
             제목, 시작 시간, 종료 시간은 필수 입력 항목입니다.
           </font></font></p>
         </div>
-        <div class="ui buttons">
+        <div class="ui fluid buttons" id="submit">
           <button id="Cancel" class="ui button">취소</button>
           <div class="or"></div>
           <button id="complete_btn" class="ui positive button">일정 추가</button>
