@@ -2,18 +2,29 @@ window.onload = function() {
     //  오토 포커스 실행
     document.getElementById('title').focus();
 
+    //  로더 숨기기
+    $('#loader').hide();
+
     //  취소 버튼 시 팝업 창 종료
     document.getElementById('Cancel').addEventListener('click',function(){
         window.close();
     });
     //  일정 추가시 캘린더에 일정 추가 후 팝업 창 종료
     document.querySelector('#complete_btn').addEventListener('click', function() {
+        //  로더 활성화
+        $('#loader').show();
+
         //  예외처리
         if(exceptionCheck()){
             //  주의!! manifest.json 파일의 scopes가 비어있는 값이면 오류발생함
             chrome.identity.getAuthToken({interactive: true}, function(token){addSchedule(token);});
         } else{
-            $('#eMsg').transition('fade');
+            //  로더 숨기기
+            $('#loader').hide();
+
+            //  메시지 출력 
+            if(!$('#eMsg').is(':visible'))
+                $('#eMsg').transition('fade');
         }
     });
 
@@ -35,6 +46,11 @@ window.onload = function() {
             .closest('#eMsg')
             .transition('fade');
     });
+    $('#close2').on('click',function(){
+        $(this)
+            .closest('#eMsg2')
+            .transition('fade');
+    });
 
     //  화면 리사이즈 감지
     setInterval(popupResize, 250);
@@ -43,8 +59,8 @@ window.onload = function() {
 //  예외처리
 function exceptionCheck(){
     if( document.getElementById('title').value &&
-        document.getElementById('start').value &&
-        document.getElementById('end').value){
+        $('#start').calendar('get date') &&
+        $('#end').calendar('get date')){
         return true;
     } else{
         return false;
@@ -104,15 +120,26 @@ function addSchedule(token){
                 throw "token expired";
             else
                 throw "Request / Response Error";
+        } else{
+            console.log("뭐지");
+            window.close();
         }
     })  
     .catch(function (error) {  
         console.log('Request failure: ', error);
 
-        if(error == "token expired")
+        if(error == "token expired"){
             chrome.identity.removeCachedAuthToken({token: token},function(){
                 chrome.identity.getAuthToken({interactive: true},function(token){addSchedule(token);});
             });
+        } else{
+            //  로더 숨기기
+            $('#loader').hide();
+
+            //  메시지 출력
+            if(!$('#eMsg2').is(':visible'))
+                $('#eMsg2').transition('fade');
+        }
     });
 }
 

@@ -18,6 +18,9 @@
   <body>
     <div class="container" id="container">
       <div class="ui basic segment" id="contents">
+        <div class="ui active inverted dimmer" id="loader">
+            <div class="ui large text loader" id="loaderTest">Loading...</div>
+        </div>
         <div class="ui fluid labeled input">
           <div class="ui violet label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
             일정 제목
@@ -96,6 +99,15 @@
           <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
             제목, 시작 시간, 종료 시간은 필수 입력 항목입니다.
           </font></font></p>
+        </div>
+        <div class="ui red message hidden" id="eMsg2">
+            <i class="close icon" id="close2"></i>
+            <div class="header"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+              오류 발생!
+            </font></font></div>
+            <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+              시작 시간과 종료 시간을 다시 한번 확인해 주십시오. 제대로 설정되어 있다면 제목/설명/알림 시간 등에 부적절한 입력이 있지 않았는지 확인해 주십시오. 
+            </font></font></p>
         </div>
         <div class="ui fluid buttons" id="submit">
           <button id="Cancel" class="ui button">취소</button>
