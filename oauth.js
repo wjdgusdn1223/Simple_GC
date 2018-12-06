@@ -1,4 +1,11 @@
+//  일정 색깔
+var colorId = 1;
+
 window.onload = function() {
+
+    //  색깔 선택 시 이벤트 발생
+    colorSel();
+
     //  오토 포커스 실행
     document.getElementById('title').focus();
 
@@ -81,36 +88,44 @@ function addSchedule(token){
     stArray[1] = monthConvert(stArray[1]);
     etArray[1] = monthConvert(etArray[1]);
     
+    //  색깔 설정
+
     //  알람 설정
     var selReminder = reminderCheck();
+
+    //  post 요청 내용
+    var postRequest = 
+    {  
+        method: 'POST',  
+        async: true,
+        headers: {
+            Authorization: 'Bearer ' + token,
+            'Content-Type': 'application/json'
+        },
+        'contentType': 'json',
+        body: JSON.stringify({
+            "start":
+            {
+                "dateTime": stArray[3] + "-" + stArray[1] + "-" + stArray[2] + "T" + stArray[4] + "+09:00"
+            },
+            "end":
+            {
+                "dateTime": etArray[3] + "-" + etArray[1] + "-" + etArray[2] + "T" + etArray[4] + "+09:00"
+            },
+            "colorId": colorId+"",
+            "visibility": "default",
+            "reminders": selReminder,
+            "description": document.getElementById('desc').value,
+            "summary": document.getElementById('title').value
+        })
+    }
+    
+    console.log(postRequest)
 
     //  post로 요청
     fetch("https://www.googleapis.com/calendar/v3/calendars/primary/events?"+
             "sendUpdates=all&key=AIzaSyDsyAyx4zEUsErwp__HN5yUnmmcekuMj28", 
-        {  
-            method: 'POST',  
-            async: true,
-            headers: {
-                Authorization: 'Bearer ' + token,
-                'Content-Type': 'application/json'
-            },
-            'contentType': 'json',
-            body: JSON.stringify({
-                "start":
-                {
-                    "dateTime": stArray[3] + "-" + stArray[1] + "-" + stArray[2] + "T" + stArray[4] + "+09:00"
-                },
-                "end":
-                {
-                    "dateTime": etArray[3] + "-" + etArray[1] + "-" + etArray[2] + "T" + etArray[4] + "+09:00"
-                },
-                "colorId":"1",
-                "visibility":"default",
-                "reminders": selReminder,
-                "description": document.getElementById('desc').value,
-                "summary": document.getElementById('title').value
-            })
-        }
+            postRequest
     )
     .then(function (data) {  
         console.log('Request success: ', data.status);
@@ -121,7 +136,6 @@ function addSchedule(token){
             else
                 throw "Request / Response Error";
         } else{
-            console.log("뭐지");
             window.close();
         }
     })  
@@ -143,61 +157,70 @@ function addSchedule(token){
     });
 }
 
+//  색깔 선택 이벤트
+function colorSel(){
+    var BC = document.getElementsByName('BC');
+    
+    for(var i = 0; i < BC.length; i++){
+        BC[i].addEventListener('click', function(event){
+            colorId = (event.toElement.id+"").split('_')[1];
+            
+            var buttonArr = document.getElementsByName('BC')
+
+            for(var i = 0; i < buttonArr.length; i++){
+                buttonArr[i].style.border = "";
+            }
+
+            document.getElementById(event.toElement.id+"").style.border = 
+                "3px solid black";
+        });
+    }
+}
+
 //  알람 요청 조건에 따라 설정
 function reminderCheck(){
-    var rArray = document.getElementsByName('reminder');
+    var popup = document.getElementById('popup').value;
+    var email = document.getElementById('email').value;
 
-    var selReminder = rArray[0];
-
-    for(var i = 0; i < rArray.length; i++){
-        if(rArray[i].checked){
-            selReminder = rArray[i];
+    if(popup === "" &&
+        email === ""){
+        selReminder = {
+            "useDefault": true
         }
-    }
-
-    switch(selReminder.id){
-        case "none":
-            selReminder = {
-                "useDefault": true
-            }
-            break;
-        case "popup":
-            selReminder = {
-                "useDefault": false,
-                "overrides": [
-                    {
-                        "method": "popup",
-                        "minutes": document.getElementById('minute').value ? document.getElementById('minute').value : '0'
-                    }
-                ]
-            }
-            break;
-        case "email":
-            selReminder = {
-                "useDefault": false,
-                "overrides": [
-                    {
-                        "method": "email",
-                        "minutes": document.getElementById('minute').value ? document.getElementById('minute').value : '0'
-                    }
-                ]
-            }
-            break;
-        case "both":
-            selReminder = {
-                "useDefault": false,
-                "overrides": [
-                    {
-                        "method": "popup",
-                        "minutes": document.getElementById('minute').value ? document.getElementById('minute').value : '0'
-                    },
-                    {
-                        "method": "email",
-                        "minutes": document.getElementById('minute').value ? document.getElementById('minute').value : '0'
-                    }
-                ]
-            }
-            break;
+    } else if(popup === ""){
+        selReminder = {
+            "useDefault": false,
+            "overrides": [
+                {
+                    "method": "email",
+                    "minutes": email
+                }
+            ]
+        }
+    } else if(email === ""){
+        selReminder = {
+            "useDefault": false,
+            "overrides": [
+                {
+                    "method": "popup",
+                    "minutes": popup
+                }
+            ]
+        }
+    } else{
+        selReminder = {
+            "useDefault": false,
+            "overrides": [
+                {
+                    "method": "popup",
+                    "minutes": popup
+                },
+                {
+                    "method": "email",
+                    "minutes": email
+                }
+            ]
+        }
     }
 
     return selReminder;
