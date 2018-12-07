@@ -162,18 +162,30 @@ function colorSel(){
     var BC = document.getElementsByName('BC');
     
     for(var i = 0; i < BC.length; i++){
-        BC[i].addEventListener('click', function(event){
+        if(i > 0)
+            BC[i].style.opacity = "0.2";
+        
+        $('#'+BC[i].id).on('click', function(event){
             colorId = (event.toElement.id+"").split('_')[1];
             
             var buttonArr = document.getElementsByName('BC')
 
             for(var i = 0; i < buttonArr.length; i++){
-                buttonArr[i].style.border = "";
+                buttonArr[i].style.opacity = "0.2";
             }
 
-            document.getElementById(event.toElement.id+"").style.border = 
-                "3px solid black";
+            document.getElementById(event.toElement.id+"").style.opacity = 
+                "1.0";
         });
+        $('#'+BC[i].id).hover(
+            function(){
+                $(this).css('opacity', "1.0");
+            },
+            function(){
+                if(($(this).attr('id')+"").split('_')[1] != colorId)
+                    $(this).css('opacity',"0.2");
+            }
+        );
     }
 }
 

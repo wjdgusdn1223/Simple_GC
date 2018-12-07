@@ -1,6 +1,6 @@
 {
-  "name": "Simple_GC",
-    "version": "1.0",
+  "name": "Add Schedule Simply",
+    "version": "1.2",
     "description": "간단하게 일정을 추가할 수 있는 확장프로그램",
     "manifest_version": 2,
     "browser_action": {
